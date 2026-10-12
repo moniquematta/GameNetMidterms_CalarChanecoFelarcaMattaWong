@@ -1706,7 +1706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ebb00a3cafd734ea73b4a231729fc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PhotonLobby
-  sceneToLoad: 
+  sceneToLoad: Lvl1
   createButton: {fileID: 1664924687}
   joinButton: {fileID: 541751845}
   cancelButton: {fileID: 1555581975}

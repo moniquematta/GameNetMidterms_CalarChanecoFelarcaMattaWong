@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Photon.Pun;
@@ -26,7 +29,6 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
     {
         lobby = this;
         PhotonNetwork.AutomaticallySyncScene = true;
-        Debug.Log("Scene Sync: " + PhotonNetwork.AutomaticallySyncScene);
     }
 
     private void Start()
