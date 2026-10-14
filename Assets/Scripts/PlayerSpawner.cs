@@ -9,7 +9,7 @@ using Photon.Realtime;
 public class PlayerSpawner : MonoBehaviourPunCallbacks
 {
     [Header("Player Settings")]
-    public GameObject playerPrefab; // must be in Resources folder
+    public GameObject[] playerPrefab; // must be in Resources folder
     private int playerId;
 
     [Header("Spawn Points")]
@@ -84,7 +84,7 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
 
         // The prefab MUST be in a folder called "Resources"
         // Instantiate networked player
-        GameObject newPlayer = PhotonNetwork.Instantiate(playerPrefab.name, spawnLocation.position, spawnLocation.rotation);
+        GameObject newPlayer = PhotonNetwork.Instantiate(playerPrefab[playerId - 1].name, spawnLocation.position, spawnLocation.rotation);
 
         // Store a reference so Photon knows this player exists
         PhotonNetwork.LocalPlayer.TagObject = newPlayer;
