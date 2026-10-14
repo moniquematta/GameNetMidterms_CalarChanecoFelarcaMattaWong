@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 3
   tags:
   - Activator
+  - pushable
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Objects
   - Water
   - UI
   - Ground
