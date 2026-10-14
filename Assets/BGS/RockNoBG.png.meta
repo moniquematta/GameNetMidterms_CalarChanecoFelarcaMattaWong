@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 2830fc8fb7b5f6f468c187aa70ca559e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4488776873222046083
+    second: RockNoBG_0
+  - first:
+      213: -4492000198319611711
+    second: RockNoBG_1
+  - first:
+      213: 4964359102328277817
+    second: RockNoBG_2
+  - first:
+      213: 2821727012937914462
+    second: RockNoBG_3
+  - first:
+      213: 5769315108719356091
+    second: RockNoBG_4
+  - first:
+      213: -1098454687959145506
+    second: RockNoBG_5
+  - first:
+      213: 2927905056702321605
+    second: RockNoBG_6
+  - first:
+      213: 3853411719233961295
+    second: RockNoBG_7
+  - first:
+      213: 3473901161471665699
+    second: RockNoBG_8
+  - first:
+      213: 3514706720090919053
+    second: RockNoBG_9
+  - first:
+      213: 7970049276515201693
+    second: RockNoBG_10
+  - first:
+      213: 2775125960521302066
+    second: RockNoBG_11
+  - first:
+      213: 7915937967286495602
+    second: RockNoBG_12
+  - first:
+      213: 2953198008161171915
+    second: RockNoBG_13
+  - first:
+      213: 6854272515382166289
+    second: RockNoBG_14
+  - first:
+      213: -9013753835572392534
+    second: RockNoBG_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: RockNoBG_0
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 230
+        width: 61
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7e7c936739a4b1c0800000000000000
+      internalID: -4488776873222046083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RockNoBG_1
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 232
+        width: 70
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c0ec288e9539a1c0800000000000000
+      internalID: -4492000198319611711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RockNoBG_2
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 244
+        width: 48
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93b01cf1d42f4e440800000000000000
+      internalID: 4964359102328277817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RockNoBG_3
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 254
+        width: 40
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e58d943a4c9c82720800000000000000
+      internalID: 2821727012937914462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RockNoBG_4
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 257
+        width: 58
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb8e2843689b01050800000000000000
+      internalID: 5769315108719356091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RockNoBG_5
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 230
+        width: 47
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed3255af74181c0f0800000000000000
+      internalID: -1098454687959145506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RockNoBG_6
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 216
+        width: 53
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c3dfc8e22202a820800000000000000
+      internalID: 2927905056702321605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RockNoBG_7
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 227
+        width: 40
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4d744ada811a7530800000000000000
+      internalID: 3853411719233961295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RockNoBG_8
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 119
+        width: 47
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 326e55a63b6c53030800000000000000
+      internalID: 3473901161471665699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RockNoBG_9
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 105
+        width: 98
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8092b4e32fb6c030800000000000000
+      internalID: 3514706720090919053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RockNoBG_10
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 98
+        width: 62
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d923c01079d4b9e60800000000000000
+      internalID: 7970049276515201693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RockNoBG_11
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 84
+        width: 49
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23046db9b5a338620800000000000000
+      internalID: 2775125960521302066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RockNoBG_12
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 97
+        width: 71
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 279a32c04af0bdd60800000000000000
+      internalID: 7915937967286495602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RockNoBG_13
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 104
+        width: 48
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc976d311fddbf820800000000000000
+      internalID: 2953198008161171915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RockNoBG_14
+      rect:
+        serializedVersion: 2
+        x: 507
+        y: 104
+        width: 43
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 113c31989844f1f50800000000000000
+      internalID: 6854272515382166289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RockNoBG_15
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 104
+        width: 46
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aad84e9b4a6b8e280800000000000000
+      internalID: -9013753835572392534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      RockNoBG_0: -4488776873222046083
+      RockNoBG_1: -4492000198319611711
+      RockNoBG_10: 7970049276515201693
+      RockNoBG_11: 2775125960521302066
+      RockNoBG_12: 7915937967286495602
+      RockNoBG_13: 2953198008161171915
+      RockNoBG_14: 6854272515382166289
+      RockNoBG_15: -9013753835572392534
+      RockNoBG_2: 4964359102328277817
+      RockNoBG_3: 2821727012937914462
+      RockNoBG_4: 5769315108719356091
+      RockNoBG_5: -1098454687959145506
+      RockNoBG_6: 2927905056702321605
+      RockNoBG_7: 3853411719233961295
+      RockNoBG_8: 3473901161471665699
+      RockNoBG_9: 3514706720090919053
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
