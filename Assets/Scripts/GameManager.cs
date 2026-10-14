@@ -44,6 +44,13 @@ public class GameManager : MonoBehaviourPunCallbacks
             }
             UpdateTimerUI(); //formats the timer display
         }
+
+        // Toggle movement with backslash key for testing purposes
+        if (Input.GetKeyDown(KeyCode.Backslash))
+        {
+            allowMovement = !allowMovement;
+            Debug.Log($"Movement toggled: {allowMovement}");
+        }
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
