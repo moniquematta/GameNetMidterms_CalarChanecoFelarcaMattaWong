@@ -30,6 +30,10 @@ public class WinWarp : MonoBehaviour
         if (allPlayersInZone)
         {
             Debug.Log("All players are in the trigger zone! Loading next level...");
+            foreach (GameObject player in players)
+            {
+                Destroy(player);
+            }
             SceneManager.LoadScene(sceneName);
         }
     }
