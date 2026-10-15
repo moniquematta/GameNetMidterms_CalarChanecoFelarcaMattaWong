@@ -1,6 +1,7 @@
 using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 public class WinWarp : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class WinWarp : MonoBehaviour
         if (allPlayersInZone)
         {
             Debug.Log("All players are in the trigger zone! Loading next level...");
-            SceneManager.LoadScene(sceneName);
+            PhotonNetwork.LoadLevel(sceneName);
         }
     }
 }
