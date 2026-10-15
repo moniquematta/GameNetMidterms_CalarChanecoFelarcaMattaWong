@@ -10,11 +10,13 @@ using Photon.Realtime;
 public class Player2DController : MonoBehaviourPun, IPunObservable
 {
     [Header("Movement Settings")]
-    public float moveSpeed = 5f;
+    public float moveSpeed = 8f;
     public float jumpForce = 7f;
 
     private Rigidbody2D rb;
     public bool isGrounded = false;
+    private float horizontal;
+    private bool isFacingRight = true;
 
     [Header("Interaction Settings")]
     public Transform interactPoint; //this is referenced to an empty child in front of the player
@@ -23,14 +25,14 @@ public class Player2DController : MonoBehaviourPun, IPunObservable
 
     [Header("Network sync variables")]
     private Vector3 networkPosition;
-    private Quaternion networkRotation;
+    private bool networkFacingRight = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         networkPosition = transform.position;
-        networkRotation = transform.rotation;
+        networkFacingRight = isFacingRight;
     }
 
     // Update is called once per frame
@@ -38,7 +40,6 @@ public class Player2DController : MonoBehaviourPun, IPunObservable
     {
         if (photonView.IsMine) //for the local player
         {
-
             if (GameManager.allowMovement)
             {
                 HandleMovement();
@@ -46,35 +47,59 @@ public class Player2DController : MonoBehaviourPun, IPunObservable
             }
             else
             {
+                horizontal = 0f;
                 rb.linearVelocity = Vector2.zero;
             }
         }
         else //for the remote players
         {
             transform.position = Vector3.Lerp(transform.position, networkPosition, Time.deltaTime * 10f);
-            transform.rotation = Quaternion.Lerp(transform.rotation, networkRotation, Time.deltaTime * 10f);
+
+            if (isFacingRight != networkFacingRight)
+                SetFacing(networkFacingRight);
         }
+    }
+
+    // Horizontal velocity is applied in FixedUpdate (from PlayerMovement)
+    void FixedUpdate()
+    {
+        if (!photonView.IsMine || !GameManager.allowMovement) return;
+
+        rb.linearVelocity = new Vector2(horizontal * moveSpeed, rb.linearVelocity.y);
     }
 
     void HandleMovement()
     {
-        float move = Input.GetAxis("Horizontal");
+        // Read input (from PlayerMovement)
+        horizontal = Input.GetAxisRaw("Horizontal");
 
-        // Move left/right
-        rb.linearVelocity = new Vector2(move * moveSpeed, rb.linearVelocity.y);
+        // Flip sprite based on direction (from PlayerMovement)
+        Flip();
 
-        // Flip character when moving left/right
-        if (move > 0.1f)
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        else if (move < -0.1f)
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-
-        // Jump
+        // Jump (original Player2DController jump, unchanged)
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
         }
+    }
+
+    private void Flip()
+    {
+        if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
+        {
+            SetFacing(!isFacingRight);
+        }
+    }
+
+    // Applies the facing direction via localScale.x. Also used by remote players.
+    private void SetFacing(bool faceRight)
+    {
+        isFacingRight = faceRight;
+
+        Vector3 localScale = transform.localScale;
+        localScale.x = Mathf.Abs(localScale.x) * (faceRight ? 1f : -1f);
+        transform.localScale = localScale;
     }
 
     void HandleInteraction()
@@ -121,12 +146,12 @@ public class Player2DController : MonoBehaviourPun, IPunObservable
         if (stream.IsWriting) // Local player → send data
         {
             stream.SendNext(transform.position);
-            stream.SendNext(transform.rotation);
+            stream.SendNext(isFacingRight);
         }
         else // Remote player → receive data
         {
             networkPosition = (Vector3)stream.ReceiveNext();
-            networkRotation = (Quaternion)stream.ReceiveNext();
+            networkFacingRight = (bool)stream.ReceiveNext();
         }
     }
 }
