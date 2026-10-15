@@ -56,12 +56,12 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
             return;
         }
 
-        // Prevent double-spawning if the player already exists
+        /*// Prevent double-spawning if the player already exists
         if (PhotonNetwork.LocalPlayer.TagObject != null)
         {
             Debug.Log("Player already spawned, skipping.");
             return;
-        }
+        }*/
 
         playerId = PhotonNetwork.LocalPlayer.ActorNumber;
         Debug.Log("playerID: " + playerId);
