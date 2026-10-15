@@ -327,7 +327,6 @@ GameObject:
   - component: {fileID: 21875578}
   - component: {fileID: 21875577}
   - component: {fileID: 21875576}
-  - component: {fileID: 21875575}
   - component: {fileID: 21875574}
   m_Layer: 3
   m_Name: InteractiveObject (1)
@@ -382,18 +381,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &21875575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 21875573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b4d7d42682ac4d498f4a3891e74387b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
 --- !u!114 &21875576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,8 +399,7 @@ MonoBehaviour:
   Synchronization: 1
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents:
-  - {fileID: 21875575}
+  ObservedComponents: []
   sceneViewId: 2
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -1583,7 +1569,6 @@ GameObject:
   - component: {fileID: 809004023}
   - component: {fileID: 809004022}
   - component: {fileID: 809004021}
-  - component: {fileID: 809004020}
   - component: {fileID: 809004025}
   m_Layer: 3
   m_Name: InteractiveObject
@@ -1592,18 +1577,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &809004020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 809004019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b4d7d42682ac4d498f4a3891e74387b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
 --- !u!114 &809004021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1622,8 +1595,7 @@ MonoBehaviour:
   Synchronization: 1
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents:
-  - {fileID: 809004020}
+  ObservedComponents: []
   sceneViewId: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -4192,7 +4164,6 @@ GameObject:
   - component: {fileID: 1905434390}
   - component: {fileID: 1905434389}
   - component: {fileID: 1905434388}
-  - component: {fileID: 1905434387}
   - component: {fileID: 1905434386}
   m_Layer: 3
   m_Name: InteractiveObject (3)
@@ -4247,18 +4218,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1905434387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1905434385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b4d7d42682ac4d498f4a3891e74387b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
 --- !u!114 &1905434388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4277,8 +4236,7 @@ MonoBehaviour:
   Synchronization: 1
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents:
-  - {fileID: 1905434387}
+  ObservedComponents: []
   sceneViewId: 5
   InstantiationId: 0
   isRuntimeInstantiated: 0
