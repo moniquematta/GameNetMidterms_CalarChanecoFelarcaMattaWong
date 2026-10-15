@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PressurePlate : MonoBehaviour
@@ -7,13 +8,15 @@ public class PressurePlate : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     [SerializeField] private float _maxDownDistance = 0.1f;
 
+    [SerializeField] private bool _isWinButton = false; // If this is a win button, it will be yellow when not pressed.
+
     public bool IsPressed => _objectsOnPlate > 0;
 
     void Start()
     {
         _originalPos = transform.position;
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.color = Color.red;
+        _spriteRenderer.color = _isWinButton ? Color.yellow : Color.red;
     }
 
     //Pressure plate only goes down when Player or Pushable object is on top of it. 
@@ -38,7 +41,7 @@ public class PressurePlate : MonoBehaviour
         _objectsOnPlate = Mathf.Max(0, _objectsOnPlate - 1);
         if (!IsPressed)
         {
-            _spriteRenderer.color = Color.red;
+            _spriteRenderer.color = _isWinButton ? Color.yellow : Color.red;
         }
     }
 
