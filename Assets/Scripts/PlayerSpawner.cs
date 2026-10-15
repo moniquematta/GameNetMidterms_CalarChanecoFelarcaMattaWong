@@ -15,6 +15,7 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
     [Header("Spawn Points")]
     public Transform[] spawnPoints;
 
+    //this is for the owner of the server (player who created the game)
     public void Start()
     {
         if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
@@ -29,11 +30,12 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
 
     IEnumerator DelaySpawn()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.2f); // wait a frame or two
         SpawnPlayer();
         Debug.Log("Spawned player: " + playerId);
     }
 
+    //this is accessed by players who joined the server
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined a room, spawning player...");
@@ -54,10 +56,17 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
             return;
         }
 
+        /*// Prevent double-spawning if the player already exists
+        if (PhotonNetwork.LocalPlayer.TagObject != null)
+        {
+            Debug.Log("Player already spawned, skipping.");
+            return;
+        }*/
+
         playerId = PhotonNetwork.LocalPlayer.ActorNumber;
         Debug.Log("playerID: " + playerId);
 
-        Transform spawnLocation;
+        Transform spawnLocation; //this gets the position of location transform
 
         if (playerId == 1)
         {
@@ -73,20 +82,11 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
             spawnLocation = spawnPoints[randomIndex];
         }
 
-        // Destroy old player if it exists (prevents sticky players)
-        if (PhotonNetwork.LocalPlayer.TagObject != null)
-        {
-            GameObject oldPlayer = PhotonNetwork.LocalPlayer.TagObject as GameObject;
-            if (oldPlayer != null)
-            {
-                Destroy(oldPlayer);
-            }
-        }
-
+        // The prefab MUST be in a folder called "Resources"
         // Instantiate networked player
         GameObject newPlayer = PhotonNetwork.Instantiate(playerPrefab[playerId - 1].name, spawnLocation.position, spawnLocation.rotation);
 
-        // Store reference
+        // Store a reference so Photon knows this player exists
         PhotonNetwork.LocalPlayer.TagObject = newPlayer;
 
         Debug.Log("Spawned player " + playerId + " at " + spawnLocation.name);
