@@ -44,6 +44,7 @@ MonoBehaviour:
   - RPC_SetGrabbed
   - RPC_StartTimer
   - RPC_ToggleBlocker
+  - RPC_Grab
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

@@ -60,7 +60,7 @@ public class Player2DController : MonoBehaviourPun, IPunObservable
         }
     }
 
-    // Horizontal velocity is applied in FixedUpdate (from PlayerMovement)
+    // basically the same as update but for physics stuff, like movement
     void FixedUpdate()
     {
         if (!photonView.IsMine || !GameManager.allowMovement) return;
@@ -70,13 +70,13 @@ public class Player2DController : MonoBehaviourPun, IPunObservable
 
     void HandleMovement()
     {
-        // Read input (from PlayerMovement)
+        // Read input (the shiny new one that doesnt fuck up our shit)
         horizontal = Input.GetAxisRaw("Horizontal");
 
         // Flip sprite based on direction (from PlayerMovement)
         Flip();
 
-        // Jump (original Player2DController jump, unchanged)
+        // Jump (took this from sir cause I dont wanna add ground point)
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -84,7 +84,7 @@ public class Player2DController : MonoBehaviourPun, IPunObservable
         }
     }
 
-    private void Flip()
+    private void Flip() //flips the fucker
     {
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
         {
@@ -140,15 +140,15 @@ public class Player2DController : MonoBehaviourPun, IPunObservable
         }
     }
 
-    // 🔹 Photon built-in sync method
+    //  Photon built-in sync method cause I aint touching that
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (stream.IsWriting) // Local player → send data
+        if (stream.IsWriting) // Local player will send data
         {
             stream.SendNext(transform.position);
             stream.SendNext(isFacingRight);
         }
-        else // Remote player → receive data
+        else // makes sure that the remote players receive the data
         {
             networkPosition = (Vector3)stream.ReceiveNext();
             networkFacingRight = (bool)stream.ReceiveNext();

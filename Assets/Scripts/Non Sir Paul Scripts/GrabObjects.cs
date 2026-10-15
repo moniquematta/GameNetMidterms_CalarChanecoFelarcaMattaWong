@@ -45,7 +45,7 @@ public class GrabObjects : MonoBehaviourPun
         }
     }
 
-    // Runs on EVERY client, so everyone sees the box held the same way
+    // Runs on EVERY client, so everyone sees the box held the same way(Avoids the schizophrenic box)
     [PunRPC]
     public void RPC_Grab(int boxViewID)
     {
@@ -77,6 +77,7 @@ public class GrabObjects : MonoBehaviourPun
         obj.transform.position = grabPoint.position + offset;
     }
 
+    // basically the same as RPC_Grab but for releasing the box, so everyone sees it drop the same way and it doesnt try to harass me anymore :(
     [PunRPC]
     public void RPC_Release()
     {
@@ -107,7 +108,7 @@ public class GrabObjects : MonoBehaviourPun
             if (overlapping) yield return null;
         }
 
-        // Don't re-enable if someone grabbed it again in the meantime
+        // DONT BE LIKE ME AND FUCK UP, this is a hacky way to make sure the box isn't parented to something else before re-enabling collisions.
         if (obj != null && obj.transform.parent == null)
             SetIgnoreCollision(obj, false);
     }
@@ -118,6 +119,7 @@ public class GrabObjects : MonoBehaviourPun
         if (sync != null) sync.enabled = enabled;
     }
 
+    // this makes it so the player and box arent making out when the box is being held
     private void SetIgnoreCollision(GameObject obj, bool ignore)
     {
         foreach (Collider2D boxCol in obj.GetComponents<Collider2D>())
