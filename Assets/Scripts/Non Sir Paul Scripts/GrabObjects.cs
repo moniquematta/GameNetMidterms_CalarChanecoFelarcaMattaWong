@@ -1,15 +1,14 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Photon.Pun;
 
-public class GrabObjects : MonoBehaviour
+public class GrabObjects : MonoBehaviourPun
 {
     [SerializeField] private Transform grabPoint;
     [SerializeField] private Transform rayPoint;
     [SerializeField] private float rayDistance = 1f;
-    [SerializeField] private LayerMask grabbableLayers; // set this to "Objects" in the Inspector
-
-    // Name of the child object on a grabbable that marks where the player holds it.
-    // If an object has no child with this name, it is held by its center like before.
+    [SerializeField] private LayerMask grabbableLayers;
     [SerializeField] private string objectGrabPointName = "grabPoint";
 
     private GameObject grabbedObject;
@@ -17,78 +16,113 @@ public class GrabObjects : MonoBehaviour
 
     private void Awake()
     {
-        // Every collider on the player (and its children) so the held object can ignore all of them
         playerColliders = GetComponentsInChildren<Collider2D>();
     }
 
     private void Update()
     {
-        // transform.right ignores scale. If you flip the player with localScale.x = -1,
-        // use this instead: Vector2.right * Mathf.Sign(transform.localScale.x)
-        Vector2 dir = transform.right;
+        // Only the local player reads input. Everyone else's copy just receives the RPCs.
+        if (!photonView.IsMine) return;
 
+        Vector2 dir = transform.right;
         Debug.DrawRay(rayPoint.position, dir * rayDistance, Color.red);
 
         if (!Keyboard.current.eKey.wasPressedThisFrame) return;
 
-        // Already holding something: E always drops it, no raycast needed
         if (grabbedObject != null)
         {
-            Release();
+            photonView.RPC(nameof(RPC_Release), RpcTarget.All);
             return;
         }
 
-        // Not holding anything: look for something to grab
         RaycastHit2D hit = Physics2D.Raycast(rayPoint.position, dir, rayDistance, grabbableLayers);
-        if (hit.collider != null)
+        if (hit.collider == null) return;
+
+        PhotonView boxView = hit.collider.GetComponentInParent<PhotonView>();
+        if (boxView != null)
         {
-            Grab(hit.collider.gameObject);
+            photonView.RPC(nameof(RPC_Grab), RpcTarget.All, boxView.ViewID);
         }
     }
 
-    private void Grab(GameObject obj)
+    // Runs on EVERY client, so everyone sees the box held the same way
+    [PunRPC]
+    public void RPC_Grab(int boxViewID)
     {
+        PhotonView boxView = PhotonView.Find(boxViewID);
+        if (boxView == null || grabbedObject != null) return;
+
+        GameObject obj = boxView.gameObject;
+        if (obj.transform.parent != null) return; // someone is already holding it
+
+        // The grabber becomes the owner, so they simulate the box after dropping it
+        if (photonView.IsMine) boxView.RequestOwnership();
+
         grabbedObject = obj;
 
         Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
-        rb.linearVelocity = Vector2.zero;   // use rb.velocity on Unity versions before 6
+        rb.linearVelocity = Vector2.zero;   
         rb.angularVelocity = 0f;
         rb.bodyType = RigidbodyType2D.Kinematic;
 
-        // Stops the held box from pushing the player (this was causing the gliding)
+        SetSyncEnabled(obj, false); 
         SetIgnoreCollision(obj, true);
 
-        //basically, if the object has a child called "grabPoint", the rock will hold it by that point, otherwise rock will hold it by its center
         Transform objGrabPoint = obj.transform.Find(objectGrabPointName);
         Vector3 offset = objGrabPoint != null
-            ? obj.transform.position - objGrabPoint.position // changes the "center" of the object to the grabPoint
-            : Vector3.zero; // no grab point on the object: hold by the center
+            ? obj.transform.position - objGrabPoint.position
+            : Vector3.zero;
 
         obj.transform.SetParent(grabPoint);
         obj.transform.position = grabPoint.position + offset;
     }
 
-    private void Release()
+    [PunRPC]
+    public void RPC_Release()
     {
-        SetIgnoreCollision(grabbedObject, false);
+        if (grabbedObject == null) return;
 
-        grabbedObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-        grabbedObject.transform.SetParent(null);
+        GameObject obj = grabbedObject;
         grabbedObject = null;
+
+        obj.transform.SetParent(null);
+        obj.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        SetSyncEnabled(obj, true);
+
+        StartCoroutine(ReenableCollisionWhenClear(obj));
+    }
+
+    private IEnumerator ReenableCollisionWhenClear(GameObject obj)
+    {
+        Collider2D[] boxCols = obj.GetComponents<Collider2D>();
+        bool overlapping = true;
+
+        while (overlapping)
+        {
+            overlapping = false;
+            foreach (Collider2D b in boxCols)
+                foreach (Collider2D p in playerColliders)
+                    if (b.Distance(p).isOverlapped) overlapping = true;
+
+            if (overlapping) yield return null;
+        }
+
+        // Don't re-enable if someone grabbed it again in the meantime
+        if (obj != null && obj.transform.parent == null)
+            SetIgnoreCollision(obj, false);
+    }
+
+    private void SetSyncEnabled(GameObject obj, bool enabled)
+    {
+        PhotonRigidbody2DView sync = obj.GetComponent<PhotonRigidbody2DView>();
+        if (sync != null) sync.enabled = enabled;
     }
 
     private void SetIgnoreCollision(GameObject obj, bool ignore)
     {
         foreach (Collider2D boxCol in obj.GetComponents<Collider2D>())
-        {
             foreach (Collider2D playerCol in playerColliders)
-            {
-                // The box is a child of the player while held, so skip its own colliders
                 if (playerCol != boxCol)
-                {
                     Physics2D.IgnoreCollision(boxCol, playerCol, ignore);
-                }
-            }
-        }
     }
 }
