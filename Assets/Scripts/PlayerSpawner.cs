@@ -44,7 +44,6 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
 
     // === NEW SHIT ===
     // when another player joins, re-apply the split once their player has spawned
-    // this is just a fail safe, the split is also applied when the player spawns
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         StartCoroutine(SplitScreenRoutine());
@@ -100,7 +99,6 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
         Debug.Log("Spawned player " + playerId + " at " + spawnLocation.name);
 
         // === NEW SHIT ===
-        // After spawning, apply the split screen layout
         StartCoroutine(SplitScreenRoutine());
     }
 
@@ -113,8 +111,8 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
     }
 
     // === NEW SHIT ===
-    // this function applies the split screen layout based on the number of players
-    // player 1(Emma) gets the top half of the screen, player 2(Dwayne) gets the bottom half
+    // Player 1 (Emma) gets the top half, Player 2 (Dwayne) gets the bottom half
+    // for Level 2 only, Player 1(Emma) gets the left half, Player 2 (Dwayne) gets the right half
     void ApplySplitScreen()
     {
         PhotonView[] views = FindObjectsByType<PhotonView>(FindObjectsSortMode.None);
@@ -129,10 +127,8 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
             cam.gameObject.SetActive(true);
             cam.enabled = true;
 
-            if (view.Owner.ActorNumber == 1)
-                cam.rect = new Rect(0f, 0.5f, 1f, 0.5f); // top half
-            else
-                cam.rect = new Rect(0f, 0f, 1f, 0.5f);   // bottom half
+            // === NEW SHIT ===
+            cam.rect = SplitScreenCamera.GetSplitRect(view.Owner.ActorNumber);
         }
     }
 }
