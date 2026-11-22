@@ -42,6 +42,14 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
         SpawnPlayer();
     }
 
+    // === NEW SHIT ===
+    // when another player joins, re-apply the split once their player has spawned
+    // this is just a fail safe, the split is also applied when the player spawns
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        StartCoroutine(SplitScreenRoutine());
+    }
+
     void SpawnPlayer()
     {
         if (playerPrefab == null)
@@ -90,5 +98,41 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
         PhotonNetwork.LocalPlayer.TagObject = newPlayer;
 
         Debug.Log("Spawned player " + playerId + " at " + spawnLocation.name);
+
+        // === NEW SHIT ===
+        // After spawning, apply the split screen layout
+        StartCoroutine(SplitScreenRoutine());
+    }
+
+    // === NEW SHIT ===
+    // waits briefly so remote players have time to spawn, then applies the split
+    IEnumerator SplitScreenRoutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+        ApplySplitScreen();
+    }
+
+    // === NEW SHIT ===
+    // this function applies the split screen layout based on the number of players
+    // player 1(Emma) gets the top half of the screen, player 2(Dwayne) gets the bottom half
+    void ApplySplitScreen()
+    {
+        PhotonView[] views = FindObjectsByType<PhotonView>(FindObjectsSortMode.None);
+
+        foreach (PhotonView view in views)
+        {
+            if (view.Owner == null) continue;
+
+            Camera cam = view.GetComponentInChildren<Camera>(true);
+            if (cam == null) continue;
+
+            cam.gameObject.SetActive(true);
+            cam.enabled = true;
+
+            if (view.Owner.ActorNumber == 1)
+                cam.rect = new Rect(0f, 0.5f, 1f, 0.5f); // top half
+            else
+                cam.rect = new Rect(0f, 0f, 1f, 0.5f);   // bottom half
+        }
     }
 }

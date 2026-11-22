@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1811529881263765718}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 38.368313, y: -11.350873, z: -59.11913}
+  m_LocalPosition: {x: 23.5, y: 2.7, z: -59.11913}
   m_LocalScale: {x: 5.911913, y: 5.911913, z: 5.911913}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -62,14 +62,14 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.5
     width: 1
-    height: 1
+    height: 0.5
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -153,6 +153,7 @@ GameObject:
   - component: {fileID: 6089861396841899959}
   - component: {fileID: 4790659952317985157}
   - component: {fileID: -7018773906927084912}
+  - component: {fileID: 6999736647474282213}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player
@@ -377,6 +378,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   objectGrabPointName: grabPoint
+--- !u!114 &6999736647474282213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3140168143427502513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abe3cbd4bdc290e43b27092f082198e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SplitScreenCamera
+  cam: {fileID: 0}
+  listener: {fileID: 0}
 --- !u!1 &3843331307998911408
 GameObject:
   m_ObjectHideFlags: 0
