@@ -15,6 +15,42 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
     [Header("Spawn Points")]
     public Transform[] spawnPoints;
 
+    // this one starts the split screen routine after spawning a player, so that the split is applied to all cameras in the scene
+    [Header("Split Screen")]
+    [Tooltip("Unchecked = top/bottom split. Checked = left/right (vertical) split.")]
+    public bool verticalSplit = false;
+
+
+    // this one starts the split screen routine after spawning a player, so that the split is applied to all cameras in the scene
+    [Header("Camera Framing (per level)")]
+    public float zoomSize = 5f;          
+    public bool overrideHeight = true;   
+    public float heightOffset = 3.5f;    
+
+
+    // this one starts the split screen routine after spawning a player, so that the split is applied to all cameras in the scene
+    void Awake()
+    {
+        SplitScreenCamera.VerticalSplit = verticalSplit;
+    }
+
+#if UNITY_EDITOR
+
+    // this is for developing purposes cause i want to see the split screen in the editor without having to run the game
+    // Let me have this, okay PLEAAAAAAAAAAASE
+    void OnValidate()
+    {
+        SplitScreenCamera.VerticalSplit = verticalSplit;
+
+        if (Application.isPlaying) return;
+        UnityEditor.EditorApplication.delayCall += () =>
+        {
+            foreach (var c in FindObjectsByType<SplitScreenCamera>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+                c.RefreshPreview();
+        };
+    }
+#endif
+
     //this is for the owner of the server (player who created the game)
     public void Start()
     {
@@ -42,7 +78,7 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
         SpawnPlayer();
     }
 
-    // === NEW SHIT ===
+
     // when another player joins, re-apply the split once their player has spawned
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
@@ -98,11 +134,11 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
 
         Debug.Log("Spawned player " + playerId + " at " + spawnLocation.name);
 
-        // === NEW SHIT ===
+    
         StartCoroutine(SplitScreenRoutine());
     }
 
-    // === NEW SHIT ===
+
     // waits briefly so remote players have time to spawn, then applies the split
     IEnumerator SplitScreenRoutine()
     {
@@ -110,9 +146,8 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
         ApplySplitScreen();
     }
 
-    // === NEW SHIT ===
-    // Player 1 (Emma) gets the top half, Player 2 (Dwayne) gets the bottom half
-    // for Level 2 only, Player 1(Emma) gets the left half, Player 2 (Dwayne) gets the right half
+
+    // This decides which half of the screen each player sees, and applies it to all cameras in the scene.
     void ApplySplitScreen()
     {
         PhotonView[] views = FindObjectsByType<PhotonView>(FindObjectsSortMode.None);
@@ -127,7 +162,7 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
             cam.gameObject.SetActive(true);
             cam.enabled = true;
 
-            // === NEW SHIT ===
+            // Set the camera's viewport rect based on the player's actor number
             cam.rect = SplitScreenCamera.GetSplitRect(view.Owner.ActorNumber);
         }
     }
