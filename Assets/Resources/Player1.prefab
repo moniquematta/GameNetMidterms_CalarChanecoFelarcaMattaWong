@@ -154,6 +154,7 @@ GameObject:
   - component: {fileID: 4790659952317985157}
   - component: {fileID: -7018773906927084912}
   - component: {fileID: 6999736647474282213}
+  - component: {fileID: 5060805824926971811}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player
@@ -393,6 +394,18 @@ MonoBehaviour:
   cam: {fileID: 183011960670684455}
   listener: {fileID: 7550792099642914429}
   previewPlayerNumber: 1
+--- !u!114 &5060805824926971811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3140168143427502513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bffb739ec19d00648a3119d37528e027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EmmaAbility
 --- !u!1 &3843331307998911408
 GameObject:
   m_ObjectHideFlags: 0

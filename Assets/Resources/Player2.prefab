@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 4790659952317985157}
   - component: {fileID: -7018773906927084912}
   - component: {fileID: 551684272249008348}
+  - component: {fileID: -3525358043776900666}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player
@@ -384,6 +385,18 @@ MonoBehaviour:
   cam: {fileID: 2829058745837109494}
   listener: {fileID: 0}
   previewPlayerNumber: 2
+--- !u!114 &-3525358043776900666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3140168143427502513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ed38a05cc600746b76ff8b22c19bdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DwayneAbility
 --- !u!1 &3843331307998911408
 GameObject:
   m_ObjectHideFlags: 0
