@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1811529881263765718}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 20.691696, z: -59.11913}
+  m_LocalPosition: {x: 0, y: 5.911913, z: -59.11913}
   m_LocalScale: {x: 5.911913, y: 5.911913, z: 5.911913}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -69,7 +69,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -357,6 +357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player2DController
   moveSpeed: 5
   jumpForce: 7
+  Renderer: {fileID: 3407857857080577019}
   isGrounded: 1
   abilityScript: {fileID: 5060805824926971811}
   interactPoint: {fileID: 7776243257287115464}
@@ -407,6 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bffb739ec19d00648a3119d37528e027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EmmaAbility
+  Renderer: {fileID: 0}
 --- !u!1 &3843331307998911408
 GameObject:
   m_ObjectHideFlags: 0

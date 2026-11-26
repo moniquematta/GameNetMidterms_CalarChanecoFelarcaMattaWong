@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using Photon.Realtime;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using Photon.Pun;
-using Photon.Realtime;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player2DController : MonoBehaviourPun, IPunObservable
@@ -14,6 +15,7 @@ public class Player2DController : MonoBehaviourPun, IPunObservable
     public float jumpForce = 7f;
 
     private Rigidbody2D rb;
+    public SpriteRenderer Renderer;
     public bool isGrounded = false;
     private bool isDashing = false;
     private float horizontal;
@@ -70,7 +72,8 @@ public class Player2DController : MonoBehaviourPun, IPunObservable
     {
         if (!photonView.IsMine || !GameManager.allowMovement) return;
 
-        rb.linearVelocity = new Vector2(horizontal * moveSpeed, rb.linearVelocity.y);
+        if (!isDashing) // Prevent movement during dash
+            rb.linearVelocity = new Vector2(horizontal * moveSpeed, rb.linearVelocity.y);
     }
 
     void HandleMovement()
@@ -101,9 +104,12 @@ public class Player2DController : MonoBehaviourPun, IPunObservable
     IEnumerator Dash()
     {
         isDashing = true;
+        Renderer.color = Color.orange;
         abilityScript.GetComponent<EmmaAbility>().ActivateDash();
-        yield return new WaitForSeconds(0.4f); // Replace with actual dash duration
+
+        yield return new WaitForSeconds(0.2f); // Replace with actual dash duration
         isDashing = false;
+        Renderer.color = Color.white;
     }
 
     private void Flip() //flips the fucker
