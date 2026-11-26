@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Activator
   - pushable
+  - button
   layers:
   - Default
   - TransparentFX

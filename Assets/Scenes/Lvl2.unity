@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 2683314}
   m_Layer: 0
   m_Name: buttonWin1
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -711,7 +711,7 @@ GameObject:
   - component: {fileID: 286475793}
   m_Layer: 0
   m_Name: button Dwayne Platforms
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1765,7 +1765,7 @@ GameObject:
   - component: {fileID: 811600830}
   m_Layer: 0
   m_Name: 'button Emma Platforms '
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4512,7 +4512,7 @@ GameObject:
   - component: {fileID: 1922958615}
   m_Layer: 0
   m_Name: buttonWin2
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

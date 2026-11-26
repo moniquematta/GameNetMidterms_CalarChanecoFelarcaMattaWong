@@ -15,8 +15,13 @@ public class Player2DController : MonoBehaviourPun, IPunObservable
 
     private Rigidbody2D rb;
     public bool isGrounded = false;
+    private bool isDashing = false;
     private float horizontal;
     private bool isFacingRight = true;
+
+    [SerializeField] private MonoBehaviour abilityScript;
+    // Reference to the ability script (DwayneAbility or EmmaAbility)
+    // pls pls PLS make sure to assign only these scripts ^
 
     [Header("Interaction Settings")]
     public Transform interactPoint; //this is referenced to an empty child in front of the player
@@ -71,7 +76,10 @@ public class Player2DController : MonoBehaviourPun, IPunObservable
     void HandleMovement()
     {
         // Read input (the shiny new one that doesnt fuck up our shit)
-        horizontal = Input.GetAxisRaw("Horizontal");
+        if (!isDashing)
+        {
+            horizontal = Input.GetAxisRaw("Horizontal");
+        }
 
         // Flip sprite based on direction (from PlayerMovement)
         Flip();
@@ -82,6 +90,20 @@ public class Player2DController : MonoBehaviourPun, IPunObservable
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
         }
+
+        // Dash ability (for Emma) -- F key
+        if (gameObject.name == "Player1" && Input.GetKeyDown(KeyCode.F) && !isDashing)
+        {
+            StartCoroutine(Dash());
+        }
+    }
+
+    IEnumerator Dash()
+    {
+        isDashing = true;
+        abilityScript.GetComponent<EmmaAbility>().ActivateDash();
+        yield return new WaitForSeconds(0.4f); // Replace with actual dash duration
+        isDashing = false;
     }
 
     private void Flip() //flips the fucker
