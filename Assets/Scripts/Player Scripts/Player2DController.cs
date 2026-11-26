@@ -92,7 +92,7 @@ public class Player2DController : MonoBehaviourPun, IPunObservable
         }
 
         // Dash ability (for Emma) -- F key
-        if (gameObject.name == "Player1" && Input.GetKeyDown(KeyCode.F) && !isDashing)
+        if (gameObject.name == "Player1(Clone)" && Input.GetKeyDown(KeyCode.F) && !isDashing)
         {
             StartCoroutine(Dash());
         }
