@@ -1,4 +1,4 @@
-﻿using Photon.Pun;
+﻿﻿﻿﻿﻿using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
@@ -72,23 +72,29 @@ public class Player2DController : MonoBehaviourPun, IPunObservable
     {
         if (!photonView.IsMine || !GameManager.allowMovement) return;
 
-        if (!isDashing) // Prevent movement during dash
+        if (!isDashing && !IsClimbing()) // Prevent movement during dash or climb
             rb.linearVelocity = new Vector2(horizontal * moveSpeed, rb.linearVelocity.y);
     }
 
     void HandleMovement()
     {
+        bool isClimbing = IsClimbing();
+
         // Read input (the shiny new one that doesnt fuck up our shit)
-        if (!isDashing)
+        if (!isDashing && !isClimbing)
         {
             horizontal = Input.GetAxisRaw("Horizontal");
+        }
+        else if (isClimbing)
+        {
+            horizontal = 0f;
         }
 
         // Flip sprite based on direction (from PlayerMovement)
         Flip();
 
         // Jump (took this from sir cause I dont wanna add ground point)
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded && !isClimbing)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
@@ -99,6 +105,24 @@ public class Player2DController : MonoBehaviourPun, IPunObservable
         {
             StartCoroutine(Dash());
         }
+        // Climb ability (for Dwayne) -- F key
+        if (gameObject.name == "Player2(Clone)" && Input.GetKeyDown(KeyCode.F))
+        {
+            StartCoroutine(Climb());
+        }
+    }
+
+    private bool IsClimbing()
+    {
+        return gameObject.name == "Player2(Clone)" &&
+            abilityScript.GetComponent<DwayneAbility>().IsClimbActive;
+    }
+
+    IEnumerator Climb()
+    {
+        DwayneAbility dwayneAbility = abilityScript.GetComponent<DwayneAbility>();
+        dwayneAbility.ActivateClimb();
+        yield return new WaitUntil(() => !dwayneAbility.IsClimbActive);
     }
 
     IEnumerator Dash()
